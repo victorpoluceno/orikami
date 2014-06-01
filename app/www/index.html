@@ -33,6 +33,7 @@
             <div id="deviceready" class="blink">
                 <p class="event listening">Connecting to Device</p>
                 <p class="event received">Device is Ready</p>
+                <button id="startScan">Start Scan</button>
             </div>
         </div>
         <script type="text/javascript" src="cordova.js"></script>
@@ -40,5 +41,30 @@
         <script type="text/javascript">
             app.initialize();
         </script>
+        <script type="text/javascript">
+            var resultDiv;
+
+            document.addEventListener("deviceready", init, false);
+            function init() {
+                document.querySelector("#startScan").addEventListener("touchend", startScan, false);
+                resultDiv = document.querySelector("#results");
+            }
+
+            function startScan() {
+                cordova.plugins.barcodeScanner.scan(
+                    function (result) {
+                        var s = "Result: " + result.text + "<br/>" +
+                        "Format: " + result.format + "<br/>" +
+                        "Cancelled: " + result.cancelled;
+                        resultDiv.innerHTML = s;
+                    }, 
+                    function (error) {
+                        alert("Scanning failed: " + error);
+                    }
+                );
+
+            }
+        </script>
+        <div id="results"></div>
     </body>
 </html>
