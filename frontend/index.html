@@ -1,0 +1,124 @@
+<!DOCTYPE html> 
+<html>
+<head>
+	<title>Orikami</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
+	<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+</head>
+
+<body>
+	<!-- Start of login page -->
+	<div data-role="page" id="login">
+		<div data-role="header">
+			<h1>Orikami</h1>
+		</div>
+
+		<div role="main" class="ui-content">
+			<h2>Sign in / Sign up</h2>
+			<div class="ui-grid-a">
+				<div class="ui-block-a"><a href="#home" class="ui-btn ui-shadow ui-corner-all">Google</a></div>
+				<div class="ui-block-b"><a href="#home" class="ui-btn ui-shadow ui-corner-all">Facebook</a></div>
+			</div>
+			<form name="login" id="login">
+				<fieldset data-role="controlgroup">	
+					<input placeholder="Username" name="text-basic" id="text-basic" value="" type="text">
+					<input placeholder="Password" name="password" id="password" value="" autocomplete="off" type="password">
+				</fieldset>
+				<button type="submit" id="submit" class="ui-btn ui-shadow ui-corner-all">Sign in</button>
+			</form>
+			<a href="#signup" class="ui-btn ui-shadow ui-corner-all">Sign up</a>
+		</div>
+	</div>
+
+	<!-- Start of signup page -->
+	<div data-role="page" id="signup">
+		<div data-role="header" data-add-back-btn="true">
+			<h1>Orikami</h1>
+		</div>
+
+		<div role="main" class="ui-content">
+			<h2>Sign up</h2>
+			<form name="signup" id="signup">
+				<fieldset data-role="controlgroup">	
+					<input placeholder="Nome" name="text-basic" id="text-basic" value="" type="text">
+					<input placeholder="Email" name="text-basic" id="text-basic" value="" type="text">
+					<input placeholder="Password" name="password" id="password" value="" autocomplete="off" type="password">
+				</fieldset>
+				<button type="submit" id="submit" class="ui-btn ui-shadow ui-corner-all">Sign up</button>
+			</form>
+		</div>
+	</div>
+
+	<!-- Start of home page -->
+	<div data-role="page" id="home">
+		<div data-role="header">
+			<h1>Orikami</h1>
+		</div>
+
+		<div role="main" class="ui-content">
+			<ul data-role="listview" data-inset="true">
+			    <li>
+			    	<a href="#detail">
+			    		<h2>Transactin name - NEW</h2>
+			    		<p>Transaction description.</p>
+			    	</a>
+			    </li>
+			    
+			    <li>
+			    	<a href="#detail">
+			    		<h2>Transactin name - NEW</h2>
+			    		<p>Transaction description.</p>
+			    	</a>
+			    </li>
+
+			    <li>
+			    	<a href="#detail">
+			    		<h2>Transactin name - NEW</h2>
+			    		<p>Transaction description.</p>
+			    	</a>
+			    </li>
+			</ul>
+			<a href="#capture" class="ui-btn ui-shadow ui-corner-all">Capture</a>
+		</div>
+	</div>
+
+	<!-- Start of detail page -->
+	<div data-role="page" id="detail">
+		<div data-role="header" data-add-back-btn="true">
+			<h1>Orikami</h1>
+		</div>
+
+		<div role="main" class="ui-content">
+			<h2>Transactin name - NEW</h2>
+			<h3>Transaction description.</h3>
+
+			<table data-role="table" id="table-custom-2" class="table-stroke ui-responsive">
+				<thead>
+			       	<tr>
+			        	<th>Detail</th>
+			        	<th>Value</th>
+			       	</tr>
+			     </thead>
+			     <tbody>
+			       	<tr>
+			        	<td>Detail here</td>
+			         	<td>74.00</td>
+			       	</tr>
+			       	<tr>
+			        	<td>Detail here</td>
+			        	<td>74.00</td>
+			       	</tr>
+			       	<tr>
+			        	<td>Detail here</td>
+			        	<td>74.00</td>
+			       	</tr>
+			    </tbody>
+			</table>
+
+                        <h3>Total: 222.00</h3>
+		</div>
+	</div>
+</body>
+</html>
