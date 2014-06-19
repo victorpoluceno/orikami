@@ -21,16 +21,16 @@
 
             <div role="main" class="ui-content">
                 <h2>Sign in / Sign up</h2>
-                <div class="ui-grid-a">
+                <!--<div class="ui-grid-a">
                     <div class="ui-block-a"><a href="#home" class="ui-btn ui-shadow ui-corner-all">Google</a></div>
                     <div class="ui-block-b"><a href="#home" class="ui-btn ui-shadow ui-corner-all">Facebook</a></div>
-                </div>
-                <form name="login" id="login">
+                </div>-->
+                <form name="signin-form" id="signin-form">
                     <fieldset data-role="controlgroup"> 
-                        <input placeholder="Username" name="text-basic" id="text-basic" value="" type="text">
-                        <input placeholder="Password" name="password" id="password" value="" autocomplete="off" type="password">
+                        <input placeholder="Email" name="signin-username" id="signin-username" value="" type="text">
+                        <input placeholder="Password" name="signin-password" id="signin-password" value="" autocomplete="off" type="password">
                     </fieldset>
-                    <button type="submit" id="submit" class="ui-btn ui-shadow ui-corner-all">Sign in</button>
+                    <button type="submit" class="ui-btn ui-shadow ui-corner-all">Sign in</button>
                 </form>
                 <a href="#signup" class="ui-btn ui-shadow ui-corner-all">Sign up</a>
             </div>
@@ -44,13 +44,13 @@
 
             <div role="main" class="ui-content">
                 <h2>Sign up</h2>
-                <form name="signup" id="signup">
+                <form name="signup-form" id="signup-form">
                     <fieldset data-role="controlgroup"> 
-                        <input placeholder="Nome" name="text-basic" id="text-basic" value="" type="text">
-                        <input placeholder="Email" name="text-basic" id="text-basic" value="" type="text">
-                        <input placeholder="Password" name="password" id="password" value="" autocomplete="off" type="password">
+                        <input placeholder="Nome" name="signup-name" id="signup-name" value="" type="text">
+                        <input placeholder="Email" name="signup-email" id="signup-email" value="" type="text">
+                        <input placeholder="Password" name="signup-password" id="signup-password" value="" autocomplete="off" type="password">
                     </fieldset>
-                    <button type="submit" id="submit" class="ui-btn ui-shadow ui-corner-all">Sign up</button>
+                    <button type="submit" class="ui-btn ui-shadow ui-corner-all">Sign up</button>
                 </form>
             </div>
         </div>
@@ -59,32 +59,9 @@
         <div data-role="page" id="home">
             <div data-role="header">
                 <h1>Orikami</h1>
+                <a href="#login" class="ui-btn-right">Logout</a>
             </div>
-
-            <div role="main" class="ui-content">
-                <ul data-role="listview" data-inset="true">
-                    <li>
-                        <a href="#detail">
-                            <h2>Transactin name - NEW</h2>
-                            <p>Transaction description.</p>
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a href="#detail">
-                            <h2>Transactin name - NEW</h2>
-                            <p>Transaction description.</p>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="#detail">
-                            <h2>Transactin name - NEW</h2>
-                            <p>Transaction description.</p>
-                        </a>
-                    </li>
-                </ul>
-                <a href="#capture" class="ui-btn ui-shadow ui-corner-all">Capture</a>
+            <div role="main" class="ui-content" id="transaction-home">
             </div>
         </div>
 
@@ -124,8 +101,24 @@
             </div>
         </div>
 
+        <script type="text/html" id="item_tmpl">
+            <ul data-role="listview" data-inset="true">
+                <% for ( var i = 0; i < 2; i++ ) { %>
+                <li>
+                    <a href="#detail">
+                        <h2>Transactin name - NEW</h2>
+                        <p>Transaction description.</p>
+                    </a>
+                </li>
+                <% } %>
+            </ul>
+            <a href="#capture" class="ui-btn ui-shadow ui-corner-all">Capture</a>
+        </script>
         <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/template.js"></script>
+        <script type="text/javascript" src="js/routes.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="js/parse-1.2.18.js"></script>
         <script type="text/javascript">
             app.initialize();
         </script>
