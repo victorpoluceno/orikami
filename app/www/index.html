@@ -20,6 +20,7 @@
             <div role="main" class="ui-content">
                 <h2>Sign up</h2>
                 <form name="signup-form" id="signup-form">
+                    <div style="display:none" id="signup-error"></div>
                     <fieldset data-role="controlgroup"> 
                         <input placeholder="Nome" name="signup-name" id="signup-name" value="" type="text">
                         <input placeholder="Email" name="signup-email" id="signup-email" value="" type="text">
@@ -42,6 +43,7 @@
                     <div class="ui-block-b"><a href="#home" class="ui-btn ui-shadow ui-corner-all">Facebook</a></div>
                 </div>-->
                 <form name="signin-form" id="signin-form">
+                    <div style="display:none" id="signin-error"></div>
                     <fieldset data-role="controlgroup"> 
                         <input placeholder="Email" name="signin-username" id="signin-username" value="" type="text">
                         <input placeholder="Password" name="signin-password" id="signin-password" value="" autocomplete="off" type="password">
@@ -55,6 +57,7 @@
         <script type="text/template" id="home-template">
             <div data-role="header">
                 <h1>Orikami</h1>
+                <a href="#logout" class="ui-btn-right">Logout</a>
             </div>
 
             <div role="main" class="ui-content">

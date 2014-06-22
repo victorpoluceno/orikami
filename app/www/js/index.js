@@ -89,8 +89,13 @@ SignUpView = BasicView.extend({
             error: function(user, error) {
                 // TODO: Show the error message somewhere and let the user try again.
                 console.log("Error: " + error.code + " " + error.message);
+
+                $("#signup-error").html(error.message).show();
+                $("#signup-button").removeAttr("disabled");
             }
         });
+
+        $("#signup-button").attr("disabled", "disabled");
     },
 
     getSpecificTemplateValues: function(){
@@ -131,14 +136,17 @@ SignInView = BasicView.extend({
 
         Parse.User.logIn(username, password, {
             success: function(user) {
-                // Do stuff after successful login.
                 Backbone.history.navigate('home', true);
             },
             error: function(user, error) {
-                // The login failed. Check error to see why.
                 console.log("Error: " + error.code + " " + error.message);
+
+                $("#signup-error").html("Invalid username or password. Please try again.").show();
+                $("#signin-button").removeAttr("disabled");
             }
         });
+
+        $("#signin-button").attr("disabled", "disabled");
     },
 
     getSpecificTemplateValues: function(){
@@ -152,6 +160,7 @@ var AppRouter = Backbone.Router.extend({
         "signup": "signup",
         "home": "home",
         "detail": "detail",
+        "logout": "logout",        
     },
 
     signup: function() {
@@ -160,8 +169,12 @@ var AppRouter = Backbone.Router.extend({
     },
 
     signin: function() {
-        console.log('signin click');
-        new SignInView();
+        if (Parse.User.current()) {
+            Backbone.history.navigate('home', true);
+        } else {
+            console.log('signin click');
+            new SignInView();    
+        }
     },
 
     home: function() {
@@ -173,13 +186,20 @@ var AppRouter = Backbone.Router.extend({
         console.log('detail click');
         new DetailView();
     },
+
+    logout: function() {
+        console.log('logout click');
+        Parse.User.logOut();
+        Backbone.history.navigate('', true);
+    },
 });
 
 $(document).ready(function () {
     console.log('document ready');
     document.addEventListener('deviceready', function (){
         console.log('device ready');
-        Parse.initialize("Va9dcafjWMkGn0PYMK7azpOsHANRD3Nk9AO9xq2e", "49bOHrbFxuQK6RZKB5QLgzuiBDKFYsUrqPiHmmQt");
+        Parse.initialize("Va9dcafjWMkGn0PYMK7azpOsHANRD3Nk9AO9xq2e",
+            "49bOHrbFxuQK6RZKB5QLgzuiBDKFYsUrqPiHmmQt");
 
         new AppRouter();
         Backbone.history.start({pushState: false});
