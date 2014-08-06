@@ -1,4 +1,8 @@
-BasicView = Backbone.View.extend({
+var Transaction = Parse.Object.extend("Transaction");
+var TransactionDetail = Parse.Object.extend("TransactionDetail");
+
+
+var BasicView = Backbone.View.extend({
     initialize : function () {
         //_.bindAll();
         this.render();
@@ -62,7 +66,7 @@ BasicView = Backbone.View.extend({
     }
 });
 
-SignUpView = BasicView.extend({
+var SignUpView = BasicView.extend({
     id: "signup",
     templateId: "signup-template",
 
@@ -103,16 +107,31 @@ SignUpView = BasicView.extend({
     }
 });
 
-HomeView = BasicView.extend({
+var HomeView = BasicView.extend({
     id: "home",
     templateId: "home-template",
 
     getSpecificTemplateValues: function(){
+        var query = new Parse.Query(Transaction);
+        query.find({
+            success: function(results) {
+                console.log("Successfully retrieved " + results.length + " transactions.");
+
+                // Do something with the returned Parse.Object values
+                //for (var i = 0; i < results.length; i++) {
+                //    var object = results[i];
+                //    alert(object.id + ' - ' + object.get('playerName'));
+                //}
+            },
+            error: function(error) {
+                console.log("Error: " + error.code + " " + error.message);
+            }
+        });
         return {};
     }
 });
 
-DetailView = BasicView.extend({
+var DetailView = BasicView.extend({
     id: "detail",
     templateId: "detail-template",
 
@@ -121,7 +140,7 @@ DetailView = BasicView.extend({
     }
 });
 
-SignInView = BasicView.extend({
+var SignInView = BasicView.extend({
     id: "signin",
     templateId: "signin-template",
 
@@ -160,7 +179,8 @@ var AppRouter = Backbone.Router.extend({
         "signup": "signup",
         "home": "home",
         "detail": "detail",
-        "logout": "logout",        
+        "logout": "logout",
+        "capture": "capture",             
     },
 
     signup: function() {
@@ -191,6 +211,31 @@ var AppRouter = Backbone.Router.extend({
         console.log('logout click');
         Parse.User.logOut();
         Backbone.history.navigate('', true);
+    },
+
+    capture: function() {
+        console.log('capture click');
+
+        // Temp code only to make easier to test
+        // all views. In the future this must be
+        // handle by cordova barcode capture.
+        var transaction = new Transaction();
+        transaction.set("title", "Compra de serviços sexuais");
+        transaction.set("description", "Horayyyy!");
+         
+        var transaction_detail1 = new TransactionDetail();
+        transaction_detail1.set("title", "Girl");
+        transaction_detail1.set("value", 200.00);
+        transaction_detail1.set("parent", transaction)
+        transaction_detail1.save()
+
+        var transaction_detail2 = new TransactionDetail();
+        transaction_detail2.set("title", "Room");
+        transaction_detail2.set("value", 100.00);
+        transaction_detail2.set("parent", transaction)
+        transaction_detail2.save();
+
+        Backbone.history.navigate('home', true);
     },
 });
 
